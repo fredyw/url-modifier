@@ -1,2 +1,2 @@
 # url-modifier
-A Chrome plugin to automatically modify URL
+A Chrome plugin to automatically modify URL.
