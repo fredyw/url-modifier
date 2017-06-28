@@ -1,17 +1,28 @@
 "use strict";
 
-var host = "https://www.google.com";
-chrome.webRequest.onBeforeRequest.addListener(
-  function (details) {
-    return {
-      redirectUrl: host
-    };
+// chrome.webRequest.onBeforeRequest.addListener(
+//   function (details) {
+//     return {
+//       redirectUrl: "https://www.google.com"
+//     };
+//   },
+//   {
+//     urls: [
+//       "<all_urls>"
+//     ]
+//   },
+//   ["blocking"]
+// );
+
+chrome.webRequest.onBeforeSendHeaders.addListener(
+  function(details) {
+    details.requestHeaders.push({name: "Access-Control-Allow-Origin", value: "*"});
+    return {requestHeaders: details.requestHeaders};
   },
   {
     urls: [
       "<all_urls>"
-    ],
-    // types: ["main_frame", "sub_frame", "stylesheet", "script", "image", "font", "object", "xmlhttprequest", "ping", "csp_report", "media", "websocket", "other"]
+    ]
   },
-  ["blocking"]
+  ["blocking", "requestHeaders"]
 );
